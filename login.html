@@ -1,0 +1,123 @@
+<html>
+<head>
+<style>
+   body{
+    background-image: linear-gradient(
+      135deg,
+      rgba(80, 79, 79, 0.7),
+      rgba(8, 8, 8, 0.7)
+    ),url("https://png.pngtree.com/background/20230528/original/pngtree-variety-of-indian-food-is-served-on-a-table-picture-image_2778395.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  }
+
+  form {
+    width: 300px;
+    margin: 0 auto;
+    padding: 150px;
+    /* background: #f2f2f2; */
+    border-radius: 5px;
+  }
+  
+  h2 {
+    text-align: center;
+    color: #fff;
+  }
+  
+  .form-group {
+    margin-bottom: 10px;
+  }
+  
+  label {
+    display: block;
+    font-weight: bold;
+    color: aliceblue;
+  }
+  
+  input {
+    width: 100%;
+    padding: 5px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+  }
+  
+  button {
+    width: 100%;
+    padding: 10px;
+    background: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background: #45a049;
+  }</style>
+  
+</head>
+<body>
+  
+
+
+<!-- Login Form -->
+<form id="login-form" action="hom.html">
+  <h2>Login</h2>
+  <div class="form-group">
+    <label for="login-email">Email:</label>
+    <input type="text" id="login-email" name="login-email" required>
+  </div>
+  <div class="form-group">
+    <label for="login-password">Password:</label>
+    <input type="password" id="login-password" name="login-password" required>
+  </div>
+  <button type="submit" >Login</button>
+  <br>
+  <p style="font-size:20;color:#fff">Don't have an account?<a href="form.html" style="color:aquamarine;">signup</a></p>
+</form>
+
+
+<script>
+document.getElementById('signup-form').addEventListener('submit', function(event) {
+  event.preventDefault();
+  
+  // Get form values
+  var username = document.getElementById('username').value;
+  var email = document.getElementById('email').value;
+  
+  // Validate username
+  if (username.length !== 10 || /\d/.test(username)) {
+    alert('Username should be 10 characters long and should not contain numbers.');
+    return;
+  }
+  
+  // Validate email
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    alert('Invalid email format.');
+    return;
+  }
+  
+  // Navigate to login page
+  window.location.href = 'login.html';
+});
+
+// Login Form Validation
+document.getElementById('login-form').addEventListener('submit', function(event) {
+  event.preventDefault();
+  
+  // Get form values
+  var loginEmail = document.getElementById('login-email').value;
+  var loginPassword = document.getElementById('login-password').value;
+  
+  // Validate login email
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(loginEmail)) {
+    alert('Invalid email format.');
+    return;
+  }
+  
+  // Perform login validation
+  // ...
+});
+</script>
+</body>
+</html>

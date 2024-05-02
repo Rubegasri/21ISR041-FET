@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="foodBookingApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Booking</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .container {
+            padding-top: 50px;
+        }
+        .screen-booking {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .error-message {
+            color: red;
+        }
+        .confirmation-container {
+            margin-top: 50px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .confirmation-text {
+            font-size: 18px;
+            font-weight: bold;
+            color: #28a745;
+            text-align: center;
+        }
+        .btn-confirm {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+        }
+        .btn-confirm:hover {
+            background-color: #0056b3;
+            color: #fff;
+        }
+        .smaller-input {
+            font-size: 14px;
+            padding: 0.375rem 0.75rem;
+        }
+    </style>
+</head>
+<body ng-controller="BookingController">
+
+<div class="container">
+    <div class="screen-booking">
+        <h2 class="mb-4 text-center">Food Booking</h2>
+        <form name="bookingForm" ng-submit="submitForm()" novalidate>
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" class="form-control" id="name" name="name" ng-model="formData.name" ng-required="true" ng-pattern="/^[a-zA-Z\s]*$/" >
+                <div class="error-message" ng-messages="bookingForm.name.$error" ng-show="bookingForm.name.$touched">
+                    <div ng-message="required">Name is required.</div>
+                    <div ng-message="pattern">Name should contain only alphabets.</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="phonenumber">Phone Number:</label>
+                <input type="tel" class="form-control" id="phonenumber" name="phonenumber" ng-model="formData.phonenumber" pattern="[0-9]{10}" required>
+                <div class="error-message" ng-messages="bookingForm.phonenumber.$error" ng-show="bookingForm.phonenumber.$touched || bookingForm.$submitted">
+                    <div ng-message="required">Phone number is required.</div>
+                    <div ng-message="pattern">Phone number should contain 10 digits.</div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="address">Address:</label>
+                <input type="text" class="form-control smaller-input" id="address" name="address" ng-model="formData.address" required>
+                <div class="error-message" ng-messages="bookingForm.address.$error" ng-if="bookingForm.address.$touched">
+                    <div ng-message="required">Address is required.</div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="door">Door No:</label>
+                    <input type="text" class="form-control smaller-input" id="door" name="door" ng-model="formData.door" required>
+                    <div class="error-message" ng-messages="bookingForm.door.$error" ng-if="bookingForm.door.$touched">
+                        <div ng-message="required">Door number is required.</div>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="streetname">Street Name:</label>
+                    <input type="text" class="form-control smaller-input" id="streetname" name="streetname" ng-model="formData.streetname" required>
+                    <div class="error-message" ng-messages="bookingForm.streetname.$error" ng-if="bookingForm.streetname.$touched">
+                        <div ng-message="required">Street name is required.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="landmark">Landmark:</label>
+                <input type="text" class="form-control smaller-input" id="landmark" name="landmark" ng-model="formData.landmark" required>
+                <div class="error-message" ng-messages="bookingForm.landmark.$error" ng-if="bookingForm.landmark.$touched">
+                    <div ng-message="required">Landmark is required.</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="markpoint">Mark Point:</label>
+                <input type="text" class="form-control smaller-input" id="markpoint" name="markpoint" ng-model="formData.markpoint">
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="city">City:</label>
+                    <input type="text" class="form-control smaller-input" id="city" name="city" ng-model="formData.city" required>
+                    <div class="error-message" ng-messages="bookingForm.city.$error" ng-if="bookingForm.city.$touched">
+                        <div ng-message="required">City is required.</div>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="pincode">Pincode:</label>
+                    <input type="text" class="form-control smaller-input" id="pincode" name="pincode" ng-model="formData.pincode" pattern="[0-9]{6}" required>
+                    <div class="error-message" ng-messages="bookingForm.pincode.$error" ng-if="bookingForm.pincode.$touched">
+                        <div ng-message="required">Pincode is required.</div>
+                        <div ng-message="pattern">Please enter a valid pincode.</div>
+                    </div>
+                </div>
+            </div>
+            <!-- Add other form fields with validation here -->
+            <button type="submit" class="btn btn-block btn-confirm">Confirm Booking</button>
+        </form>
+    </div>
+</div>
+
+<div class="container confirmation-container" ng-show="confirmation">
+    <div class="confirmation-text">
+        Booking confirmed! Thank you.
+    </div>
+    <div class="text-center">
+        <a href="home.html" class="btn btn-primary">Back to Home</a>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-messages.min.js"></script>
+<script>
+    var app = angular.module('foodBookingApp', ['ngMessages']);
+
+    app.controller('BookingController', function($scope, FormValidationService, $location) {
+        $scope.submitForm = function() {
+            if (FormValidationService.validateForm($scope.bookingForm)) {
+                // Form is valid, navigate to confirmation page
+                $scope.confirmation = true;
+            } else {
+                // Form is invalid, show error messages
+                console.log('Form is not valid');
+            }
+        };
+    });
+
+    app.factory('FormValidationService', function() {
+        return {
+            validateForm: function(form) {
+                if (form.$valid) {
+                    return true;
+                } else {
+                    // Mark all fields as touched to display error messages
+                    angular.forEach(form.$error, function (field) {
+                        angular.forEach(field, function (errorField) {
+                            errorField.$setTouched();
+                        })
+                    });
+                    return false;
+                }
+            }
+        };
+    });
+</script>
+
+</body>
+</html>

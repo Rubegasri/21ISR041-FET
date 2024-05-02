@@ -1,0 +1,128 @@
+<html>
+    <head>
+        <title>feedback</title>
+    </head>
+<body>
+    
+<link rel="stylesheet" href="feed.css">
+<div class="container"><!-- Header -->
+    <header>
+      <h1 id="title">Your Best Food Ever, Tak Tak Delivery</h1>
+      <p id="description">Thank you for taking the time to tell us about your favourite food.</p>
+    </header>
+    <!-- Form -->
+    <form action="" id="survey-form" enctype="multipart/form-data" method="POST">
+      <!-- Username -->
+      <div class="form-option">
+        <label for="name" id="name-label">name</label>
+        <input type="text" id="name" name="username" placeholder="Enter your name" required>
+      </div>
+      <!-- Email -->
+      <div class="form-option">
+        <label for="email" id="email-label">email</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required onclick="ValidateEmailAddr(email)">
+      </div>
+      <!-- Age -->
+      <div class="form-option">
+        <label for="number" id="number-label">age <span class="optional">(optional)</span></label>
+        <input type="number" id="number" name="age" placeholder="Age" min="10" max="100">
+      </div>
+      <!-- Cooking Level [Radio Options] -->
+      <div class="form-option">
+        <p>Our cooking level?</p>
+        <div >
+        <table><tr class="form-radio-option"> 
+            <td><input type="radio" id="excellent" name="cooking-level" value="excellent">
+                <label for="excellent">excellent</label> </td>
+            <td></td>
+            
+            <td> <input type="radio" id="good" name="cooking-level" value="good"></td>
+            <td>  <label for="good">good</label></td>
+            <td> <input type="radio" id="acceptable" name="cooking-level" value="acceptable"></td>
+            <td>  <label for="acceptable">acceptable</label></td>
+            <td> <input type="radio" id="poor" name="cooking-level" value="poor"></td>
+            <td>  <label for="poor">poor</label></td>
+        </tr>
+        
+              <!-- <div class="form-radio-option">
+         
+        
+        </div>
+        <div class="form-radio-option">
+         
+        
+        </div> -->
+    </div>
+    </table>
+      </div>
+      <!-- Select
+      <div class="form-option">
+        <p>do you want to be a chef?</p>
+        <select name="want to be chef" id="dropdown">
+          <option disabled selected value>Select Option</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+          <option value="i will think about it">I Will Think About It</option>
+        </select>
+      </div> -->
+      <!-- Your Best recipe [Checkbox Options] -->
+      <div class="form-option">
+        <br>
+        <p>What is your favorite recipe?
+          <span class="optional"> (check all that apply)</span>
+        </p>
+        <table>
+       <tr class="form-checkbox-option">
+        <td> <input type="checkbox" id="burger" value="burger" name="favourite-food"></td>
+         <td><label for="burger">Biriyani</label></td>
+        <td><input type="checkbox" id="pizza" value="pizza" name="favourite-food"></td>
+        <td><label for="pizza">Fried Rice</label></td>
+        <td><input type="checkbox" id="fries" value="fries" name="favourite-food"></td>
+          <td><label for="fries">Noodles</label></td>
+          <td><input type="checkbox" id="steak" value="steak" name="favourite-food"></td>
+          <td><label for="steak">Naan</label></td></table>
+          </tr>
+          <table>
+          <tr class="form-checkbox-option">
+          <td><input type="checkbox" id="chicken" value="chicken" name="favourite-food"></td>
+          <td><label for="chicken">Tandoori</label></td>
+          <td><input type="checkbox" id="fettuccine" value="fettuccine" name="favourite-food"></td>
+          
+          <td><label for="salad">Butter Chicken</label></td>
+          <td><input type="checkbox" id="macaroni" value="macaroni" name="favourite-food"></td>
+          <td><label for="macaroni">Meen Fry</label></td>
+          <td><input type="checkbox" id="fish" value="fish" name="favourite-food"></td>
+          <td><label for="fish">Non Veg Meals</label></td></tr>
+       </table>
+     
+      <!-- Comments [textarea ] -->
+      <div class="form-option">
+        <br>
+        <p>any comments about food?</p>
+        <textarea name="comment" id="user-comment" placeholder="Enter your comment here..."></textarea>
+      </div>
+      <!-- Submit -->
+      <div class="form-option">
+        <input onclick="myfun()" type="submit" value="submit" id="submit" class="submit" >
+      </div>
+      <script>
+        function myfun() {
+          alert("Thankyou for your time");
+        }
+        function ValidateEmailAddr(email){
+  var atSymbol = emailAddress.indexOf("@");                                  // Get the index of the '@'
+  var period = emailAddress.lastIndexOf(".");                                // Get the value of the last '.'
+  var suffix = emailAddress.substring(period + 1, email.length);
+  
+  // Make sure the '@' symbol and '.' is in a valid location
+  if (((atSymbol != 0) && (atSymbol != -1)) && (suffix.length == 3) && (atSymbol < period) && (atSymbol != period - 1)) { 
+    if ((suffix == "com") || (suffix == "org") || (suffix == "gov") || (suffix == "net") || (suffix == "edu")) 
+      return true;
+  }
+  return false;
+}
+        </script>
+    </form>
+  </div>
+</body>
+</html>

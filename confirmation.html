@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="foodBookingApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Confirmation</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-body text-center">
+            <h2 class="card-title">Booking Confirmed!</h2>
+            <p class="card-text">Your booking has been confirmed.</p>
+            <a href="#/home" class="btn btn-primary">Back to Home</a>
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+<script>
+    var app = angular.module('foodBookingApp', []);
+
+    app.config(function($routeProvider) {
+        $routeProvider
+            .when('/home', {
+                templateUrl: 'index.html',
+                controller: 'BookingController'
+            })
+            .when('/confirmation', {
+                templateUrl: 'confirmation.html'
+            })
+            .otherwise({redirectTo: '/home'});
+    });
+</script>
+
+</body>
+</html>
